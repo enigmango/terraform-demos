@@ -14,9 +14,10 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "backend-elb" {
+resource "aws_instance" "backend_elb" {
   count         = var.instance_count
   ami           = data.aws_ami.ubuntu.id
+  subnet_id     = aws_subnet.backend_elb.id
   instance_type = "t2.micro"
 
   tags = {
@@ -24,10 +25,12 @@ resource "aws_instance" "backend-elb" {
   }
 }
 
-resource "aws_instance" "backend-nlb" {
+resource "aws_instance" "backend_nlb" {
   count         = var.instance_count
   ami           = data.aws_ami.ubuntu.id
+  subnet_id     = aws_subnet.backend_nlb.id
   instance_type = "t2.micro"
+
 
   tags = {
     Name = "NLB backend server ${count.index}"
