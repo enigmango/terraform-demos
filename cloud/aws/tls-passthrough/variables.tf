@@ -1,3 +1,8 @@
+variable "name_slug" {
+  type    = string
+  default = "passthrough-demo"
+}
+
 variable "instance_count" {
   type    = number
   default = 1

@@ -21,7 +21,8 @@ resource "aws_instance" "backend_elb" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "ELB backend server ${count.index}"
+    Name       = "${var.name_slug}-elb-backend-${count.index + 1}"
+    created-by = "terraform"
   }
 }
 
@@ -33,7 +34,8 @@ resource "aws_instance" "backend_nlb" {
 
 
   tags = {
-    Name = "NLB backend server ${count.index}"
+    Name       = "${var.name_slug}-nlb-backend-${count.index + 1}"
+    created-by = "terraform"
   }
 }
 
