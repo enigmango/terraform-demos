@@ -1,6 +1,7 @@
 resource "aws_security_group" "frontend_elb" {
   name        = "${var.base_name}-frontend-elb"
   description = "Allow TLS inbound traffic from internet"
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port = 443

@@ -6,18 +6,18 @@ resource "aws_elb" "main" {
 
   listener {
     instance_port     = 443
-    instance_protocol = "https"
+    instance_protocol = "TCP"
     lb_port           = 443
-    lb_protocol       = "tcp"
+    lb_protocol       = "TCP"
   }
 
-  health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
-    target              = "HTTPS:443/"
-    interval            = 30
-  }
+  # health_check {
+  #   healthy_threshold   = 2
+  #   unhealthy_threshold = 2
+  #   timeout             = 3
+  #   target              = "HTTPS:443/"
+  #   interval            = 30
+  # }
 
   cross_zone_load_balancing = true
   idle_timeout              = 400
