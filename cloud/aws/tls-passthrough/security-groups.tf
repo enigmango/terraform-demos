@@ -25,7 +25,7 @@ resource "aws_security_group" "backend_elb_instances" {
     to_port   = 443
     protocol  = "tcp"
     # Only traffic from the ELB
-    security_groups = aws_security_group.frontend_elb.id
+    security_groups = [aws_security_group.frontend_elb.id]
   }
 
   tags = {

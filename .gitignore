@@ -7,3 +7,6 @@
 
 # .tfvars files
 *.tfvars
+
+# local scripts for setup/testing
+setup/*
