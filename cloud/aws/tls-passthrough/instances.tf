@@ -17,11 +17,11 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "backend_elb" {
   count         = var.instance_count
   ami           = data.aws_ami.ubuntu.id
-  subnet_id     = aws_subnet.backend_elb.id
+  subnet_id     = aws_subnet.private.id
   instance_type = "t2.micro"
 
   tags = {
-    Name       = "${var.name_slug}-elb-backend-${count.index + 1}"
+    Name       = "${var.base_name}-elb-backend-${count.index + 1}"
     created-by = "terraform"
   }
 }
@@ -29,12 +29,12 @@ resource "aws_instance" "backend_elb" {
 resource "aws_instance" "backend_nlb" {
   count         = var.instance_count
   ami           = data.aws_ami.ubuntu.id
-  subnet_id     = aws_subnet.backend_nlb.id
+  subnet_id     = aws_subnet.private.id
   instance_type = "t2.micro"
 
 
   tags = {
-    Name       = "${var.name_slug}-nlb-backend-${count.index + 1}"
+    Name       = "${var.base_name}-nlb-backend-${count.index + 1}"
     created-by = "terraform"
   }
 }

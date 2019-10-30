@@ -1,6 +1,7 @@
-variable "name_slug" {
-  type    = string
-  default = "passthrough-demo"
+variable "base_name" {
+  type        = string
+  default     = "passthrough-demo"
+  description = "Base name to be included in all resources"
 }
 
 variable "instance_count" {
@@ -8,17 +9,12 @@ variable "instance_count" {
   default = 1
 }
 
+# Will be divided into 2 equally-sized subnets
+# Must be at least a /24 to support the minimum /25 required for LBs
+# Subnet 1 (e.g. 10.200.200.0/25) will be public
+# Subnet 2 (e.g. 10.200.200.128/25) will be private
 variable "vpc_cidr" {
-  type    = string
-  default = "10.222.222.0/24"
-}
-
-variable "backend_subnet_cidr_1" {
-  type    = string
-  default = "10.222.222.0/25"
-}
-
-variable "backend_subnet_cidr_2" {
-  type    = string
-  default = "10.222.222.128/25"
+  type        = string
+  default     = "10.200.200.0/24"
+  description = "CIDR range for VPC. Will be divided into 2 equally-sized subnets"
 }
